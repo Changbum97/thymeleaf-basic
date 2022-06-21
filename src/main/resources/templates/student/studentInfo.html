@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2 th:text="#{page.studentInfo}"/>
+<div align="center">
+    <div style="border: black;border-style: solid; width:700px; text-align: left; padding: 20px;">
+        <div>
+            <label th:text="|#{label.student.name} : |"/>
+            <label th:text="${student.name}"/>
+        </div>
+        <br/>
+        <div>
+            <label th:text="|#{label.student.studentId} : |"/>
+            <label th:text="${student.studentId}"/>
+        </div>
+        <br/>
+        <div>
+            <label  th:text="|#{label.student.age} : |"/>
+            <label th:text="${student.age}"/>
+        </div>
+        <br/>
+        <div>
+            <label th:text="|#{label.student.attending} : |"/>
+            <label th:if="${student.attending == true}" th:text="재학중" />
+            <label th:unless="${student.attending == true}" th:text="휴학중"/>
+        </div>
+        <br/>
+        <div>
+            <div th:text="|&lt;#{label.student.clubs}&gt;|"/>
+            <div th:each="club : ${clubs}" style="display: inline-block; margin-right: 10px;">
+                <label th:for="${#ids.next('clubs')}" th:text="${club.value}"/>
+                <input type="checkbox" th:field="${student.clubs}" th:value="${club.key}" disabled>
+            </div>
+        </div>
+        <br/>
+
+        <div>
+            <label th:text="|#{label.student.gender} : |"/>
+            <label th:text="${student.gender.description}"/>
+        </div>
+        <br/>
+
+        <div>
+            <label th:text="|#{label.student.grade} : |"/>
+            <label th:text="${student.grade.description}"/>
+        </div>
+        <br/>
+
+        <div>
+            <label th:text="|#{label.student.major} : |"/>
+            <label th:text="${student.major}"/>
+        </div>
+        <br/>
+
+    </div>
+</div>
+</body>
+</html>

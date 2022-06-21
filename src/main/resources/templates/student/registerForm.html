@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h2 th:text="#{page.registerForm}" />
+    <div align="center">
+        <form action="/student/register" th:object="${student}" method="post"
+              style="border: black;border-style: solid; width:700px; text-align: left; padding: 20px;">
+            <div>
+                <label th:for="name" th:text="#{label.student.name}"/>
+                <input type="text" th:field="*{name}" placeholder="이름을 입력하세요"/>
+            </div>
+            <br/>
+            <div>
+                <label th:for="studentId" th:text="#{label.student.studentId}"/>
+                <input type="text" th:field="*{studentId}" placeholder="학번을 입력하세요"/>
+            </div>
+            <br/>
+            <div>
+                <label th:for="age"  th:text="#{label.student.age}"/>
+                <input type="text" th:field="*{age}" placeholder="나이를 입력하세요"/>
+            </div>
+            <br/>
+
+            <!-- single checkbox -->
+            <div  th:text="|&lt;#{label.student.attending}&gt;|"/>
+            <div>
+                <label th:for="attending">재학</label>
+                <input type="checkbox" th:field="*{attending}" />
+            </div>
+            <br/>
+
+            <!-- multi checkbox -->
+            <div>
+                <div  th:text="|&lt;#{label.student.clubs}&gt;|"/>
+                <div th:each="club : ${clubs}" style="display: inline-block; margin-right: 10px;">
+                    <label th:for="${#ids.next('clubs')}" th:text="${club.value}"/>
+                    <input type="checkbox" th:field="*{clubs}" th:value="${club.key}">
+                </div>
+            </div>
+            <br/>
+
+            <!-- radio button -->
+            <div>
+                <div th:text="|&lt;#{label.student.gender}&gt;|"/>
+                <div th:each="gender : ${genders}" style="display: inline-block; margin-right: 10px;">
+                    <label th:for="${#ids.next('gender')}" th:text="${gender.description}"/>
+                    <input type="radio" th:field="*{gender}" th:value="${gender.name()}">
+                </div>
+            </div>
+            <br/>
+
+            <div>
+                <div th:text="|&lt;#{label.student.grade}&gt;|"/>
+                <div th:each="grade : ${grades}" style="display: inline-block; margin-right: 10px;">
+                    <label th:for="${#ids.next('grade')}" th:text="${grade.description}"/>
+                    <input type="radio" th:field="*{grade}" th:value="${grade.name()}">
+                </div>
+            </div>
+            <br/>
+
+            <!-- select -->
+            <div>
+                <div th:text="|&lt;#{label.student.major}&gt;|"/>
+                <select th:field="*{major}">
+                    <option value="">----전공 선택----</option>
+                    <option th:each="major : ${majors}" th:value="${major}" th:text="${major}" />
+                </select>
+            </div>
+
+            <br/><br/><br/>
+            <div align="center">
+                <button type="submit" th:text="#{button.save}"/>
+            </div>
+
+        </form>
+    </div>
+</body>
+</html>

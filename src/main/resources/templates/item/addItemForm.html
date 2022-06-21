@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .field-error {
+            border-color: red;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<h2>아이템 등록</h2>
+<div align="center">
+    <form action="/item/add" th:object="${item}" method="post"
+          style="border: black;border-style: solid; width:700px; text-align: left; padding: 20px;">
+
+        <div th:if="${#fields.hasGlobalErrors()}">
+            <p class="field-error" th:each="err : ${#fields.globalErrors()}" th:text="${err}"/>
+        </div>
+
+        <div>
+            <label th:for="name">상품명 : </label>
+            <input type="text" th:field="*{name}" placeholder="상품명을 입력하세요" th:errorclass="field-error"/>
+            <div class="field-error" th:errors="*{name}">상품명 오류</div>
+        </div>
+        <br/>
+        <div>
+            <label th:for="sellerEmail">이메일 : </label>
+            <input type="text" th:field="*{sellerEmail}" placeholder="판매자 이메일을 입력하세요" style="width: 300px;" th:errorclass="field-error"/>
+            <div class="field-error" th:errors="*{sellerEmail}">이메일 오류</div>
+        </div>
+        <br/>
+        <div>
+            <label th:for="price">가격 : </label>
+            <input type="text" th:field="*{price}" placeholder="가격을 입력하세요" th:errorclass="field-error"/>
+            <div class="field-error" th:errors="*{price}">가격 오류</div>
+        </div>
+        <br/>
+        <div>
+            <label th:for="quantity">수량: </label>
+            <input type="text" th:field="*{quantity}" placeholder="수량을 입력하세요" th:errorclass="field-error"/>
+            <div class="field-error" th:errors="*{quantity}">수량 오류</div>
+        </div>
+
+        <br/><br/><br/>
+        <div align="center">
+            <button type="submit">상품 등록</button>
+        </div>
+
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h2 th:text="#{page.studentList}"/>
+    <div>
+        <button th:onclick="|location.href='@{/student/register}'|" type="button"  th:text="#{button.save}"/>
+    </div>
+
+    <br/><br/>
+
+    <div align="center">
+        <table style="border-style: solid; border-color: black; width: 700px; text-align: center;" >
+            <thead>
+            <tr>
+                <th th:text="#{label.student.id}"/>
+                <th th:text="#{label.student.name}"/>
+                <th th:text="#{label.student.studentId}"/>
+                <th th:text="#{label.student.major}"/>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="student : ${students}">
+                <td th:text="${student.id}"/>
+                <td><a th:text="${student.name}" th:href="@{/student/studentInfo/{Id}(Id=${student.id})}" /></td>
+                <td th:text="${student.studentId}"/>
+                <td th:text="${student.major}"/>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
